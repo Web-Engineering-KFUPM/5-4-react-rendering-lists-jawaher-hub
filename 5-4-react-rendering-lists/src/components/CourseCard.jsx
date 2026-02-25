@@ -8,14 +8,24 @@ export default function CourseCard({ course, index, onMutateCourse }) {
      1) Implement toggleTask(id) using onMutateCourse + .map()
      2) Implement deleteTask(id) using onMutateCourse + .filter()
      ========================================================= */
+    function toggleTask(id) {
+      onMutateCourse(index, (tasks) => {
+        return tasks.map((task) => {
+          if (task.id === id) {
+            return { ...task, isDone: !task.isDone };
+          }
+          return task;
+        });
+      });
+    }
 
-  function toggleTask(id) {
-    // TODO (TASK 4): toggle task.isDone for the task with matching id
-  }
-
-  function deleteTask(id) {
-    // TODO (TASK 4): remove the task with matching id
-  }
+    function deleteTask(id) {
+      onMutateCourse(index, (tasks) => {
+        return tasks.filter((task) => {
+          return task.id !== id;
+        });
+      });
+    }
 
   // Helpful hints for TASK 3 (optional to use)
   // const hasTasks = course.tasks.length > 0;
@@ -39,12 +49,7 @@ export default function CourseCard({ course, index, onMutateCourse }) {
         )}
         
         <ul className="tasks">
-          {/* TODO (TASK 2): Render tasks using course.tasks.map(...)
-              For each task, render <TaskItem /> and pass:
-                - key={task.id}
-                - task={task}
-                - onToggle={toggleTask}
-                - onDelete={deleteTask} */
+          {
                 course.tasks.map((task) => (
                       <TaskItem
                         key={task.id}
@@ -52,8 +57,7 @@ export default function CourseCard({ course, index, onMutateCourse }) {
                         onToggle={toggleTask}
                         onDelete={deleteTask}
                       />
-                    ))
-  }
+                    ))}
         </ul>
       </section>
     </article>

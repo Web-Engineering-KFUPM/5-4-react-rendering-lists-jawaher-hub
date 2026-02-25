@@ -28,4 +28,5 @@ export default function DueBadge({ dueDate }) {
   // TODO (TASK 3): implement DueBadge label logic
 
   return <span className="badge">Label here</span>;
+  {!task.isDone && <DueBadge dueDate={task.dueDate} />}
 }
